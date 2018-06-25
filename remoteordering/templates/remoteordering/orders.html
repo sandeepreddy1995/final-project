@@ -1,0 +1,51 @@
+<html>
+   <head>
+      
+      <script type="text/JavaScript">
+         <!--
+            function AutoRefresh( t ) {
+               setTimeout("location.reload(true);", t);
+            }
+         //-->
+      </script>
+      <title>Serving Department</title>
+      
+   </head>
+<body onload="JavaScript:AutoRefresh(60000);">
+	<h1 style ="margin-left: 500px;">ORDERS</h1>
+	<table style = "border: 1px solid black;  border-collapse: collapse;padding:50px;">
+
+	<tr>
+	<th style = "border: 1px solid black; border-collapse: collapse;padding:50px;">Order Id </th>
+	<th style = "border: 1px solid black; border-collapse: collapse;padding:50px;">Table No</th>
+	<th style = "border: 1px solid black; border-collapse: collapse;padding:50px;">Name</th>
+	<th style = "border: 1px solid black; border-collapse: collapse;padding:50px;">Item_id</th>
+	<th style = "border: 1px solid black; border-collapse: collapse;padding:50px;padding:50px;">Item_name</th>
+	<th style = "border: 1px solid black; border-collapse: collapse;padding:50px;">Quantity</th>
+	<th style = "border: 1px solid black; border-collapse: collapse;padding:50px;">Time_Of_Order</th>
+	<th style = "border: 1px solid black; border-collapse: collapse;padding:50px;">Status</th>
+	<th style = "border: 1px solid black; border-collapse: collapse;padding:50px;">Process</th>
+	</tr>
+	{% for order in orders %}
+	<tr>
+	<td style = "border: 1px solid black; border-collapse: collapse;padding:50px;">{{ order.id }}</label></td>
+	<td style = "border: 1px solid black; border-collapse: collapse;padding:50px;">{{ order.Table_No }}</td>
+	<td style = "border: 1px solid black; border-collapse: collapse;padding:50px;">{{ order.Name }}</td>
+	<td style = "border: 1px solid black;border-collapse: collapse;padding:50px;">{{ order.Item_id }}</td>
+	<td style = "border: 1px solid black;border-collapse: collapse;padding:50px;">{{ order.Item_name }}</td>
+	<td style = "border: 1px solid black;border-collapse: collapse;padding:50px;">{{ order.Quantity }}</td>
+	<td style = "border: 1px solid black;border-collapse: collapse;padding:50px;">{{ order.Time_of_order }}</td>
+	<td style = "border: 1px solid black;border-collapse: collapse;padding:50px;">{{ order.Status }}</td>
+	<td style = "border: 1px solid black;border-collapse: collapse;padding:50px;">
+	<form action="{% url 'remoteordering:orderprocessing' %}" method ="post">
+    {% csrf_token %}
+    <input type="hidden" name="order" value = {{ order.id }}><br>
+    <input type = 'Submit' value = "DONE" style = "background-color: #000000;border: none;color: white;padding: 25px 40px;text-align: center;font-size: 16px;cursor: pointer;" >
+    </form>
+    </td>
+	</tr>
+	{% endfor %}
+	</table>
+	
+</body>
+</html>

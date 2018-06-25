@@ -1,0 +1,25 @@
+<Html>
+<head>
+<title>
+Mode Of Payment
+</title>
+<h2>Choose A Mode Of Payment </h2>
+</head>
+<body>
+<form action="{% url 'remoteordering:Pay' %}"method="post">
+{% csrf_token %}
+<input type="radio" name="Mode of Payment" id="Mode of Payment" value= "Cash"  >
+<label  for="Mode of Payment">
+CASH</label><br/><br/><br/><br/>
+<input type="radio" name="Mode of Payment" id="Mode of Payment" value= "Card"  >
+<label  for="Mode of Payment">
+DEBIT OR CREDIT CARD</label><br/><br/><br/><br/>
+<input type="radio" name="Mode of Payment" id="Mode of Payment" value= "Paytm"  >
+<label  for="Mode of Payment">
+PAYTM</label><br/><br/><br/><br/>
+
+<input type="submit" value="PAY" style = "background-color: #000000;border: none;color: white;padding: 25px 40px;text-align: center;font-size: 16px;cursor: pointer;" >
+
+</form>
+</body>
+</Html>

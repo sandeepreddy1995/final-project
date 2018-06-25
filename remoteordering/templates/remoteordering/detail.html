@@ -1,0 +1,102 @@
+{% load remoteordering_extras %}
+<h1>Menu</h1>
+<h4 style="color:red;">{{ message }}</h4>
+<br>
+<br>
+<table style="margin-top: 0px;margin-left: 1500px">
+   <tr>
+   <td>
+   <a href="{% url 'remoteordering:orderdetails' %}"><button type='button' onclick="" style = "background-color: #000000;border: none;color: white;padding: 25px 40px;text-align: center;font-size: 16px;cursor: pointer;" >MY ORDERS</button></a></td>
+   <td><a href="{% url 'remoteordering:Tabledetails' %}"><button type='button' onclick="" style = "background-color: #000000;border: none;color: white;padding: 25px 40px;text-align: center;font-size: 16px;cursor: pointer;" >TABLE USERS</button></a></td>
+   </tr>
+</table>
+<table style="margin-top: 0px;margin-left: 1000px">
+<tr>
+<td>
+<form action ="{% url 'remoteordering:Search' %}"method = "post">
+{% csrf_token %}
+  <select name="Category">
+  <option value='All'> All</option>
+  {% for item in l1 %}
+  {{ item }}
+    <option value={{ item }}>{{ item }}</option>
+    {% endfor %}
+  </select>
+  <br><br>
+   <select name="Sub_Category">
+  <option value='All'> All</option>
+  {% for item in l2 %}
+    <option value={{ item }}>{{ item }}</option>
+    {% endfor %}
+  </select>
+  <br><br>
+  <input type="submit" value="search">
+</form>
+</td>
+</tr>
+</table>
+<form action="{% url 'remoteordering:order' %}"method="post">
+{% csrf_token %}
+Your_Name :<input type="text" name="Cust_Name" value = "{{ name }}" placeholder="Enter Your Full Name to Avoid Confusion" required><br><br><br>
+TableNo:<input type="number" name="TableNo" value = "{{ TableNo }}" required><br>
+<table style = "border: 1px solid black;  border-collapse: collapse;padding:50px;">
+
+<tr>
+	<th style = "border: 1px solid black; border-collapse: collapse;padding:50px;">Item Id </th>
+	<th style = "border: 1px solid black; border-collapse: collapse;padding:50px;">Category</th>
+	<th style = "border: 1px solid black; border-collapse: collapse;padding:50px;">Sub Category</th>
+	<th style = "border: 1px solid black; border-collapse: collapse;padding:50px;">Item Name</th>
+	<th style = "border: 1px solid black; border-collapse: collapse;padding:50px;">Item Price</th>
+	<th style = "border: 1px solid black; border-collapse: collapse;padding:50px;">Status</th>
+	<th style = "border: 1px solid black; border-collapse: collapse;padding:50px;">Quantity</th>
+</tr>
+	
+{% for item in menu_items %}
+{%if item.id in l3 %}
+{{ item.id }}
+<tr>
+<td  style = "border: 1px solid black; border-collapse: collapse;padding:50px;">
+<input type="checkbox" name="item{{ forloop.counter }}" id="item{{ forloop.counter }}" value= "{{ item.id }}" checked="{{ True }}" >
+<label  for="item{{ forloop.counter }}">{{ item.id }}</label></td>
+
+<td style = "border: 1px solid black; border-collapse: collapse;padding:50px;">{{ item.Category }}</td>
+
+
+<td style = "border: 1px solid black; border-collapse: collapse;padding:50px;">{{ item.Sub_Category }}</td>
+
+
+<td style = "border: 1px solid black; border-collapse: collapse;padding:50px;">{{ item.Item_name }}</td>
+
+
+<td style = "border: 1px solid black; border-collapse: collapse;padding:50px;">{{ item.Price }}</td>
+
+
+<td style = "border: 1px solid black; border-collapse: collapse;padding:50px;">{{ item.Status }}</td>
+
+<td style = "border: 1px solid black; border-collapse: collapse;padding:50px;"><input type="number" name="quantity{{ item.id }}" id ="quantity{{ forloop.counter }}" min = '1' value =  {{ d1|get_item:item.id }} ></td></tr>
+{% else %}
+<tr>
+<td style = "border: 1px solid black; border-collapse: collapse;padding:50px;">
+<input type="checkbox" name="item{{ forloop.counter }}" id="item{{ forloop.counter }}" value= "{{ item.id }}" >
+<label  for="item{{ forloop.counter }}">{{ item.id }}</label></td>
+
+<td style = "border: 1px solid black; border-collapse: collapse;padding:50px;">{{ item.Category }}</td>
+
+<td style = "border: 1px solid black; border-collapse: collapse;padding:50px;">{{ item.Sub_Category }}</td>
+
+<td style = "border: 1px solid black; border-collapse: collapse;padding:50px;">{{ item.Item_name }}</td>
+
+<td style = "border: 1px solid black; border-collapse: collapse;padding:50px;">{{ item.Price }}</td>
+
+<td style = "border: 1px solid black; border-collapse: collapse;padding:50px;">{{ item.Status }}</td>
+
+<td style = "border: 1px solid black; border-collapse: collapse;padding:50px;"><input type="number" name="quantity{{ item.id }}" id ="quantity{{ forloop.counter }}" min = '1' value = "1"><br></td>
+</tr>
+
+{% endif %}
+{% endfor %}
+</table><hr>
+<input type="submit" value="Order" style = "background-color: #000000;border: none;color: white;padding: 25px 40px;text-align: center;font-size: 16px;cursor: pointer;">
+<button type="submit" formaction="{% url 'remoteordering:updates' %}"" style = "background-color: #000000;border: none;color: white;padding: 25px 40px;text-align: center;font-size: 16px;cursor: pointer;">UPDATE</button>
+
+</form>

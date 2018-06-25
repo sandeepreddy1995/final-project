@@ -1,0 +1,37 @@
+<html>
+   <head>
+      
+      <script type="text/JavaScript">
+         <!--
+            function AutoRefresh( t ) {
+               setTimeout("location.reload(true);", t);
+            }
+         //-->
+      </script>
+      <title>Billing Department</title>
+      
+   </head>
+<body onload="JavaScript:AutoRefresh(6000);">
+	<h1 style ="margin-left: 500px;">ORDERS</h1>
+	<table style = "border: 1px solid black;  border-collapse: collapse;padding:50px;">
+
+	<tr>
+	<th style = "border: 1px solid black; border-collapse: collapse;padding:50px;">Table No</th>
+	<th style = "border: 1px solid black; border-collapse: collapse;padding:50px;">Name</th>
+	<th style = "border: 1px solid black; border-collapse: collapse;padding:50px;">Items</th>
+	<th style = "border: 1px solid black; border-collapse: collapse;padding:50px;">Bill_Amount</th>
+	<th style = "border: 1px solid black; border-collapse: collapse;padding:50px;">Status</th>
+	</tr>
+	{% for order in orders %}
+	<tr>
+	<td style = "border: 1px solid black; border-collapse: collapse;padding:50px;">{{ order.Table_No }}</td>
+	<td style = "border: 1px solid black; border-collapse: collapse;padding:50px;">{{ order.Name }}</td>
+	<td style = "border: 1px solid black;border-collapse: collapse;padding:50px;">{{ order.Items }}</td>
+	<td style = "border: 1px solid black;border-collapse: collapse;padding:50px;">{{ order.Bill_Amount }}</td>
+	<td style = "border: 1px solid black;border-collapse: collapse;padding:50px;">{{ order.Status }}</td>
+	
+	{% endfor %}
+	</table>
+	
+</body>
+</html>

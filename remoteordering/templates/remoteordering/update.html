@@ -1,0 +1,29 @@
+<form action="{% url 'remoteordering:update' %}"method="post">
+TableNo:<input type="number" name="TableNo" value = "{{ TableNo }}" required><br>
+{% for item in menu_items %}
+{% csrf_token %}
+
+<input type="checkbox" name="item{{ forloop.counter }}" id="item{{ forloop.counter }}" value= "{{ item.id }}" checked="{{ True }}" >
+<label  for="item{{ forloop.counter }}">
+<table style = "background-color: blue;">
+<tr>
+<td><h3 style="color:white;">{{ item.Category }}</h3></td>
+</tr>
+<tr>
+<td><h3 style="color:white;">{{ item.Sub_Category }}</h3></td>
+</tr>
+<tr>
+<td><h3 style="color:white;">{{ item.Item_name }}</h3></td>
+</tr>
+<tr>
+<td><h3 style="color:white;">{{ item.Price }}</h3></td>
+</tr>
+<tr>
+<td><h3 style="color:white;">{{ item.Description }}</h3></td>
+</tr>
+<tr>
+<td><h3 style="color:white;">{{ item.Status }}</h3></td>
+</tr></table></label><br/>
+<input type="submit" value="Update">
+
+</form>

@@ -1,0 +1,25 @@
+
+<body><table style = "margin-left :500px; ">
+<tr>
+<td>
+<form action = "{% url 'remoteordering:payment' %}" method = "post">
+{% csrf_token %}
+EMAIL:<input type="email" name="email" value = "default@gmail.com" required><br></td></tr>
+<tr>
+<td>
+<h1>{{ message }}</h1></td>
+</tr>
+<tr>
+<td>{% load static %} <img src="{% static "images/bowl_company.jpg" %}" alt="Hi!" align="middle" /></td></tr>
+<tr>
+<td>
+<h3>{{ message1 }}</h3></td></tr>
+<tr>
+<td>
+
+<input type = 'Submit' value = "DONE" style = "background-color: #000000;border: none;color: white;padding: 25px 40px;text-align: center;font-size: 16px;cursor: pointer;" >
+</form>
+
+</tr>
+</table>
+</body>

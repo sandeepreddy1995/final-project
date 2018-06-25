@@ -1,0 +1,31 @@
+<head>
+	<title>
+		Table_User details
+	</title>
+</head>
+
+<body>
+	<h1>Table Customer Details</h1>
+
+	<table style="margin-top: 0px;margin-left: 1200px">
+
+   <tr>
+   <td>
+   <a href="{% url 'remoteordering:neworder' %}"><button type='button' onclick="" style = "background-color: #000000;border: none;color: white;padding: 25px 40px;text-align: center;font-size: 16px;cursor: pointer;" >NEW MEMBER</button></a></td>
+   </tr>
+   </table>
+	<table style="margin-top: 0px;">
+	<tr>
+<td>{% load static %} <img src="{% static "images/bowl_company.jpg" %}" alt="Hi!" align="middle" /></td></tr>
+	{% for Name in l1 %}
+   <tr>
+   <td>
+   <form action="{% url 'remoteordering:userdetails' %}" method ="post">
+   {% csrf_token %}
+<input type="hidden" name="Name" value = {{ Name }} ><br>
+<input type = 'Submit' value = {{ Name }} style = "background-color: #000000;border: none;color: white;padding: 25px 40px;text-align: center;font-size: 16px;cursor: pointer;">
+</form>
+<tr>
+   {% endfor %}
+</table>
+</body>

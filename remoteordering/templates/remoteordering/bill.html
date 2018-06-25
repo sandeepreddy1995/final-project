@@ -1,0 +1,68 @@
+<html>
+<head>
+<title>BillDetails</title>
+<h1 style="margin-left: 500px">Bill Details</h1>
+</head>
+<body>
+<table style="margin-top: 0px;margin-left: 1500px">
+   <tr>
+   <td>
+   <a href="{% url 'remoteordering:orderdetails' %}"> My Orders</a></td>
+   </tr>
+</table>
+<table>
+<tr>
+<td><h3>Table :</h3></td>
+<td><h3>{{ TableNo}}</h3></td>
+</tr>
+<tr>
+<td><h3>Name :</h3></td>
+<td><h3>{{ name }}</h3></td>
+</tr>
+<tr>
+<td><h3>Item_Details :</h3></td>
+<td>
+<table style = "border: 1px solid black;  border-collapse: collapse; padding: 10px;">
+<tr>
+<th style = "border: 1px solid black;  border-collapse: collapse;padding: 10px;">Item_name</th>
+<th style = "border: 1px solid black;  border-collapse: collapse;padding: 10px;">Quantity</th>
+<th style = "border: 1px solid black;  border-collapse: collapse;padding: 10px;">Price</th>
+</tr>
+
+{% for k,v in d1.items %}
+<tr>
+<td style = "border: 1px solid black;  border-collapse: collapse;padding: 10px;">{{ k }}</td>
+<td style = "border: 1px solid black;  border-collapse: collapse;padding: 10px;">{{ v.0 }}</td>
+<td style = "border: 1px solid black;  border-collapse: collapse;padding: 10px;allign:center;">{{ v.1 }}</td>
+</tr>
+{% endfor %}
+
+</table></td></tr>
+<tr>
+<td>Item Total:</td>
+<td> Rs {{ Total }}</td>
+</tr>
+<tr>
+<td>CGST 9% of Total :</td>
+<td> Rs {{ CGST  }}</td>
+</tr>
+<tr>
+<td>SGST 9% of Total  :  </td>
+<td> Rs {{ CGST  }}</td>
+</tr>
+<tr><td><hr width="150%" style="margin-left: 0px;"></td></tr>
+<tr>
+<td> Total_Bill :</td>
+<td> Rs {{ Total_Amount  }}</td>
+</tr>
+
+</table>
+<br>
+<br>
+<form action="{% url 'remoteordering:paymentmode' %}" method ="post">
+{% csrf_token %}
+<input type="hidden" name="Total_Bill" value = {{ Total_Amount }}><br>
+<input type = 'Submit' value = "PAYMENT OPTIONS" style = "background-color: #000000;border: none;color: white;padding: 25px 40px;text-align: center;font-size: 16px;cursor: pointer;">
+</form>
+</body>
+</html>

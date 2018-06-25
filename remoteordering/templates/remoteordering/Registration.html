@@ -1,0 +1,20 @@
+<html>
+<HEAD>
+	<title>Table Registration</title>
+</HEAD>
+<body>
+<h1>{{message}}</h1>
+<table style="margin-top: 0px;">
+<tr>
+<td><h1>TABLE REGISTRATION </h1></td>
+	<tr>
+	<td>
+<form action = "{% url 'remoteordering:index' %}" method = "post">
+{% csrf_token %}
+TableNo:<input type="number" name="TableNo" value = "" required><br>
+<input type = 'Submit' value = "Register" style = "background-color: #000000;border: none;color: white;padding: 25px 40px;text-align: center;font-size: 16px;cursor: pointer;" >
+</form>
+
+</table>
+</body>
+</Html>

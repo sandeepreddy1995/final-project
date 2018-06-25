@@ -1,0 +1,11 @@
+<table style = "margin-left :500px; ">
+<tr>
+<td>
+<h1>Scan The QR Code</h1></td>
+</tr>
+<tr>
+<td>{% load static %} <img src="{% static "images/paytm.jpg" %}" alt="Hi!" align="middle"  height="800" width="800"/></td></tr>
+<tr>
+<td><a href = "{% url 'remoteordering:payment' %}"><button type='button' onclick="" style = "background-color: #000000;border: none;color: white;padding: 25px 40px;text-align: center;font-size: 16px;cursor: pointer;" >Done</button></a></td>
+</tr>
+</table>
